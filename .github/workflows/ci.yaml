@@ -8,4 +8,5 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: stack test
+        - uses: actions/checkout@v4
+        - run: stack test
