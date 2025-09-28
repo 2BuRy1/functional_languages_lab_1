@@ -9,7 +9,7 @@ t_findMaxMul_edges = TestLabel "findMaxMul* edge cases" $ TestList
   , TestCase (assertEqual "Req    len<13"  0 (findMaxMulReq     [1..12]))
   , TestCase (assertEqual "Map    len<13"  0 (findMaxMulMap     [1..12]))
   , TestCase (assertEqual "Fold   len<13"  0 (findMaxMulFold    [1..12]))
-  , TestCase (assertEqual "Lazy   len<13"  0 (findMaxMulLazy    [1..12]))
+  , TestCase (assertEqual "Lazy   len<13"  0 (findMaxMulLazy    123456789012))
 
   , TestCase (let arr = replicate 13 1
               in assertEqual "TailReq 13x1" 1 (findMaxMulTailReq arr))
@@ -20,7 +20,7 @@ t_findMaxMul_edges = TestLabel "findMaxMul* edge cases" $ TestList
   , TestCase (let arr = replicate 13 1
               in assertEqual "Fold   13x1"  1 (findMaxMulFold    arr))
   , TestCase (let arr = replicate 13 1
-              in assertEqual "Lazy   13x1"  1 (findMaxMulLazy    arr))
+              in assertEqual "Lazy   13x1"  1 (findMaxMulLazy    1111111111111))
 
   , TestCase (let arr = [1,1,1,1,1,0,1,1,1,1,1,1,1]
               in assertEqual "TailReq 13 with zero" 0 (findMaxMulTailReq arr))
@@ -31,7 +31,7 @@ t_findMaxMul_edges = TestLabel "findMaxMul* edge cases" $ TestList
   , TestCase (let arr = [1,1,1,1,1,0,1,1,1,1,1,1,1]
               in assertEqual "Fold   13 with zero"  0 (findMaxMulFold    arr))
   , TestCase (let arr = [1,1,1,1,1,0,1,1,1,1,1,1,1]
-              in assertEqual "Lazy   13 with zero"  0 (findMaxMulLazy    arr))
+              in assertEqual "Lazy   13 with zero"  0 (findMaxMulLazy    1111101111111))
   ]
 
 t_findMaxMul_clearMax :: Test
@@ -45,7 +45,7 @@ t_findMaxMul_clearMax = TestLabel "findMaxMul* clear maximum windows" $ TestList
   , (let arr = replicate 13 2 ++ [1,2,3]; expected = 8192
      in TestCase (assertEqual "Fold   leading 2^13"  expected (findMaxMulFold    arr)))
   , (let arr = replicate 13 2 ++ [1,2,3]; expected = 8192
-     in TestCase (assertEqual "Lazy   leading 2^13"  expected (findMaxMulLazy    arr)))
+     in TestCase (assertEqual "Lazy   leading 2^13"  expected (findMaxMulLazy    2222222222222123)))
 
   , (let arr = replicate 10 2 ++ [0] ++ replicate 13 5 ++ [7,7,7]; expected = 3349609375
      in TestCase (assertEqual "TailReq after zero 5^13" expected (findMaxMulTailReq arr)))
@@ -56,7 +56,7 @@ t_findMaxMul_clearMax = TestLabel "findMaxMul* clear maximum windows" $ TestList
   , (let arr = replicate 10 2 ++ [0] ++ replicate 13 5 ++ [7,7,7]; expected =3349609375
      in TestCase (assertEqual "Fold   after zero 5^13"  expected (findMaxMulFold    arr)))
   , (let arr = replicate 10 2 ++ [0] ++ replicate 13 5 ++ [7,7,7]; expected = 3349609375
-     in TestCase (assertEqual "Lazy   after zero 5^13"  expected (findMaxMulLazy    arr)))
+     in TestCase (assertEqual "Lazy   after zero 5^13"  expected (findMaxMulLazy    220555555555555777)))
 
   , (let arr = replicate 13 3; expected = 1594323
      in TestCase (assertEqual "TailReq 13x3" expected (findMaxMulTailReq arr)))
@@ -67,7 +67,7 @@ t_findMaxMul_clearMax = TestLabel "findMaxMul* clear maximum windows" $ TestList
   , (let arr = replicate 13 3; expected = 1594323
      in TestCase (assertEqual "Fold   13x3"  expected (findMaxMulFold    arr)))
   , (let arr = replicate 13 3; expected = 1594323
-     in TestCase (assertEqual "Lazy   13x3"  expected (findMaxMulLazy    arr)))
+     in TestCase (assertEqual "Lazy   13x3"  expected (findMaxMulLazy    3333333333333)))
   ]
 
 
