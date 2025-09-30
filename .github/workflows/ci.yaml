@@ -7,18 +7,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: hlint src
+      - uses: haskell/actions/setup@v2
+        with:
+          ghc-version: 9.10.3
+          enable-stack: true
+      - run: stack install hlint --resolver lts-22.33
+      - run: ~/.local/bin/hlint src
 
   format:
     runs-on: ubuntu-latest
     needs: [lint]
     steps:
       - uses: actions/checkout@v4
-      - run: ormolu --mode check src/*.hs
+      - uses: haskell/actions/setup@v2
+        with:
+          ghc-version: 9.10.3
+          enable-stack: true
+      - run: stack install ormolu --resolver lts-22.33
+      - run: ~/.local/bin/ormolu --mode check src/*.hs
 
   test:
     needs: [format]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: haskell/actions/setup@v2
+        with:
+          ghc-version: 9.10.3
+          enable-stack: true
       - run: stack test
