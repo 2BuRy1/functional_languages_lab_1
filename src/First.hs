@@ -19,8 +19,9 @@ findMaxMulTailReq arr = innerFunc arr 0
                in innerFunc (drop 1 xs) newAcc
 
 findMaxMulReq :: [Int] -> Int
-findMaxMulReq arr = innerFunc
+findMaxMulReq = innerFunc
   where
+    innerFunc :: [Int] -> Int
     innerFunc xs =
       let win = take 13 xs
        in if length win < 13
@@ -48,9 +49,10 @@ digits :: Int -> [Int]
 digits x
   | x < 0 = digits (abs x)
   | x < 10 = [x]
-  | otherwise = reverse $ innerFunc x []
+  | otherwise = inner x []
   where
-    innerFunc n acc = innerFunc (n `div` 10) ((n `mod` 10) : acc)
+    inner 0 acc = acc
+    inner n acc = inner (n `div` 10) ((n `mod` 10) : acc)
 
 findMaxMulLazy :: Int -> Int
 findMaxMulLazy n =

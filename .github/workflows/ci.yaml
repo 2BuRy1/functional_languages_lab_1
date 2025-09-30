@@ -11,8 +11,10 @@ jobs:
         with:
           ghc-version: 9.10.3
           enable-stack: true
-      - run: stack install hlint --resolver lts-22.33
-      - run: ~/.local/bin/hlint src
+      - name: install hlint
+        run: stack install hlint --resolver lts-22.33
+      - name: run lint
+        run: hlint src/*.hs
 
   format:
     runs-on: ubuntu-latest
@@ -23,8 +25,10 @@ jobs:
         with:
           ghc-version: 9.10.3
           enable-stack: true
-      - run: stack install ormolu --resolver lts-22.33
-      - run: ~/.local/bin/ormolu --mode check src/*.hs
+      - name: install ormolu
+        run: stack install ormolu --resolver lts-22.33
+      - name: run formatter cheks
+        run: ormolu --mode check src/*.hs
 
   test:
     needs: [format]
