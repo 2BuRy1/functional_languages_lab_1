@@ -48,11 +48,15 @@ findMaxMulFold arr
       foldl (\best i -> max best (product (take 13 (drop i arr)))) 0 [0 .. length arr - 13]
 
 digits :: Int -> [Int]
-digits x = map (read . (:[])) (filter (/= '-') (show x))
+digits x
+    | x < 0 = digits (abs x)
+    | x < 10 = [x]
+    | otherwise = reverse $ innerFunc x []
+    where innerFunc n acc = innerFunc (n `div` 10) ((n `mod` 10) : acc)
 
 findMaxMulLazy :: Int -> Int
 findMaxMulLazy n =
-  let arr = digits (head (take 1 [n..])) 
+  let arr = digits (head (take 1 [n..]))
   in if length arr < 13
        then 0
        else maximum [ product (take 13 (drop i arr))
