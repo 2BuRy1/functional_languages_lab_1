@@ -12,7 +12,7 @@ jobs:
           ghc-version: 9.10.3
           enable-stack: true
       - name: install hlint
-        run: stack install hlint --resolver lts-22.33
+        run: stack install hlint 
       - name: run lint
         run: hlint src/*.hs
 
@@ -26,7 +26,7 @@ jobs:
           ghc-version: 9.10.3
           enable-stack: true
       - name: install ormolu
-        run: stack install ormolu --resolver lts-22.33
+        run: stack install ormolu 
       - name: run formatter cheks
         run: ormolu --mode check src/*.hs
 
