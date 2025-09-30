@@ -19,6 +19,8 @@
 # snapshot: https://example.com/snapshots/2024-01-01.yaml
 
 snapshot:
+
+
   url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/24/12.yaml
 
 # User packages to be built.
@@ -30,6 +32,9 @@ snapshot:
 #   subdirs:
 #   - auto-update
 #   - wai
+
+resolver: lts-21.22
+
 packages:
   - .
 
