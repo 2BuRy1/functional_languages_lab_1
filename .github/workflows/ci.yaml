@@ -26,9 +26,12 @@ jobs:
           ghc-version: 9.10.3
           enable-stack: true
       - name: install ormolu
-        run: stack install ormolu 
+        run: stack install ormolu
+      - name: auto format
+        run: ormolu -i src/*.hs
       - name: run formatter cheks
         run: ormolu --mode check src/*.hs
+      
 
   test:
     needs: [format]
